@@ -1,0 +1,15 @@
+#root {
+  background-color: #ffffff; /* สีพื้นหลัง */ /* สีพื้นหลังของพื้นที่หลัก */
+  width: 100%; /* ให้เต็มพื้นที่ของหน้าจอ */
+  max-width: 1440px; /* จำกัดความกว้างสูงสุดที่ 1440px */
+  height: 100vh; /* ความสูงขึ้นอยู่กับเนื้อหา */
+}
+body {
+  margin: 0; /* ลบ margin เริ่มต้น */
+  padding: 0; /* ลบ padding เริ่มต้น */
+  background-color: #ffffff; /* สีพื้นหลัง */
+  display: flex; /* ใช้ Flexbox */
+  justify-content: center; /* จัดวางให้อยู่กลางแนวนอน */
+  align-items: center; /* จัดวางให้อยู่กลางแนวตั้ง */
+  height: 100vh; /* ใช้ความสูงเต็มหน้าจอ */
+}
