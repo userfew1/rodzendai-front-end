@@ -8,10 +8,11 @@ import Project_case1 from "./pages/Project_case1";
 import Yb_schedule from "./pages/Yb_schedule";
 import Casereport from "./pages/Casereport";
 import Expense_report from "./pages/Expense_report";
-
 import Project_case2 from "./pages/Project_case2";
+
 import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 import { COLORS } from "./assets/constants";
+import CaseDetails from "./components/CaseDetails";
 
 const App: React.FC = () => {
   return (
@@ -44,8 +45,8 @@ const App: React.FC = () => {
               <Route path="/casereport" element={<Casereport />} />
               <Route path="/expense_report" element={<Expense_report />} />
               <Route path="/settings" element={<Settings />} />
-
-              {/* page */}
+              {/* Add this route */}
+              <Route path="/case/:id" element={<CaseDetails />} />
             </Routes>
           </Box>
         </Box>

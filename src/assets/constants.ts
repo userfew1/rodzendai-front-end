@@ -5,9 +5,13 @@ export const COLORS = {
   secondary: "#FFA748",
   textPrimary: "#333333",
   secondary100: "#FBFBFB",
+  background: "#F8F9FD",
 
+  success: "#2ECC71",
+  danger: "#E74C3C",
+  font: "#333333",
   textSecondary: "#4F4F4F",
-  background: "#ffffff",
+  backgroundwhile: "#ffffff",
   font_color: "#ffffff",
 };
 

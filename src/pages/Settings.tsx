@@ -50,7 +50,7 @@ const Settings: React.FC = () => {
               key={item.id}
               onClick={() => handleItemClick(item.id)}
               sx={{
-                width: "204px",
+                width: "176px",
                 height: "100px",
                 display: "flex",
                 borderRadius: "18px",
@@ -121,7 +121,7 @@ const Settings: React.FC = () => {
       {isOpen && (
         <Box
           sx={{
-            zIndex: 999999,
+            zIndex: 10,
             width: "551px", // ขนาดของ Box
             height: "920px", // ความสูงของ Box
             backgroundColor: COLORS.background, // สีพื้นหลัง
