@@ -124,6 +124,7 @@ const CaseDetails: React.FC = () => {
         gridTemplateColumns: "2fr 1fr", // แบ่งคอลัมน์ซ้ายขวา
         gap: "16px",
         backgroundColor: "#F8FAFF",
+        
         minHeight: "100vh",
       }}
     >
@@ -136,6 +137,7 @@ const CaseDetails: React.FC = () => {
             flexDirection: "row",
             alignItems: "center",
             marginBottom: "16px",
+            
           }}
         >
           <img
@@ -175,25 +177,53 @@ const CaseDetails: React.FC = () => {
         <ProfileCard />
         <Box
           sx={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "24px",
-            justifyContent: "space-between",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(364px, 1fr))", // คอลัมน์ปรับตามขนาดหน้าจอ
+            gap: "24px", // ระยะห่างระหว่างไอเทม (ทั้งแนวนอนและแนวตั้ง)
           }}
         >
           {data.map((item, idx) => (
-            <Box
+            <Paper
               key={idx}
               sx={{
-                display: "flex",
-                justifyContent: "space-between",
+                padding: "16px",
                 borderRadius: "8px",
+                border: "1px solid #6A9BFF", // เส้นขอบ
+                height: "156px",
+                width: "100%", // ปรับให้เต็มคอลัมน์ของ grid
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                boxShadow: "0px 2px 4px 0px rgba(0, 0, 0, 0.05)", // เงาตามกำหนด
               }}
             >
-              <InfoBox title={item.title} details={item.details} />
-            </Box>
+              <Box>
+                <Typography sx={{ fontWeight: "bold", color: "#407BF1" }}>
+                  {item.title}
+                </Typography>
+              </Box>
+              <Box>
+                {item.details.map(([label, value], idx) => (
+                  <Typography
+                    key={idx}
+                    sx={{
+                      color: "#4F4F4F",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      textAlign: "center",
+                    }}
+                  >
+                    <Typography sx={{ color: "#407BF1", textAlign: "center" }}>
+                      {label}
+                    </Typography>
+                    {value}
+                  </Typography>
+                ))}
+              </Box>
+            </Paper>
           ))}
         </Box>
+
         <Box
           sx={{
             height: "16px",
@@ -219,11 +249,8 @@ const CaseDetails: React.FC = () => {
       >
         {/* UI ส่วนบน */}
         {status === "รอคัดกรอง" && <ScreeningForm />}
-          {status === "ได้" && <EvaluationResultSuccess />}
-          {status === "ไม่ได้" && <EvaluationResultFailure />}
-     
-          
-   
+        {status === "ได้" && <EvaluationResultSuccess />}
+        {status === "ไม่ได้" && <EvaluationResultFailure />}
       </Box>
     </Box>
   );

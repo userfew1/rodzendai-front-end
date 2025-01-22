@@ -47,7 +47,7 @@ const ScreeningForm = () => {
         width: "100%",
         height: "872px",
         borderRadius: "18px",
-        padding: "18px",
+        padding: "16px",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -60,6 +60,10 @@ const ScreeningForm = () => {
           fontSize: "16px",
           color: "#407BF1",
           marginBottom: "16px",
+          textAlign: "left",
+          display: "flex",
+          justifyContent: "start",
+          flexDirection: "row",
         }}
       >
         คัดกรองข้อมูล
@@ -71,7 +75,10 @@ const ScreeningForm = () => {
           height: "734px",
           backgroundColor: COLORS.backgroundwhile,
           borderRadius: "18px",
-          padding: "12px",
+          padding: "16px 0px 0px 16px ",
+          display: "flex",
+          justifyContent: "start",
+          flexDirection: "column",
         }}
       >
         {renderSection(
@@ -127,6 +134,7 @@ const ScreeningForm = () => {
               "& .MuiSelect-icon": { color: "#407BF1" },
               "& .MuiOutlinedInput-notchedOutline": { border: "none" },
               padding: "8px 16px",
+              width: "408px",
             }}
           >
             <MenuItem value="" disabled>
@@ -172,8 +180,206 @@ const ScreeningForm = () => {
             ))}
           </RadioGroup>
         )}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            flexDirection: "row",
+          }}
+        >
+          {renderSection(
+            "/icons_page/profile.svg",
+            "ประเภทรถรับส่ง *",
+            <Select
+              fullWidth
+              defaultValue=""
+              displayEmpty
+              sx={{
+                height: "48px",
+                backgroundColor: "#F5F9FF",
+                borderRadius: "8px",
+                color: "#B3B3B3",
+                "& .MuiSelect-icon": { color: "#407BF1" },
+                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                padding: "8px 16px",
+                width: "195px",
+              }}
+            >
+              <MenuItem value="" disabled>
+                โปรดเลือกงบประมาณ
+              </MenuItem>
+              <MenuItem value="งบ1">งบ 1</MenuItem>
+              <MenuItem value="งบ2">งบ 2</MenuItem>
+            </Select>
+          )}
+          {renderSection(
+            "/icons_page/profile.svg",
+            "ชื่อหน่วยบริการรับส่ง *",
+            <Select
+              fullWidth
+              defaultValue=""
+              displayEmpty
+              sx={{
+                height: "48px",
+                backgroundColor: "#F5F9FF",
+                borderRadius: "8px",
+                color: "#B3B3B3",
+                "& .MuiSelect-icon": { color: "#407BF1" },
+                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                padding: "8px 16px",
+                width: "195px",
+              }}
+            >
+              <MenuItem value="" disabled>
+                โปรดเลือกงบประมาณ
+              </MenuItem>
+              <MenuItem value="งบ1">งบ 1</MenuItem>
+              <MenuItem value="งบ2">งบ 2</MenuItem>
+            </Select>
+          )}
+        </Box>
+        {renderSection(
+          "/icons_page/profile.svg",
+          "จุดรับส่งผู้ป่วย (ลิงก์กูเกิลแมป) ",
+          <Select
+            fullWidth
+            defaultValue=""
+            displayEmpty
+            sx={{
+              height: "48px",
+              backgroundColor: "#F5F9FF",
+              borderRadius: "8px",
+              color: "#B3B3B3",
+              "& .MuiSelect-icon": { color: "#407BF1" },
+              "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+              padding: "8px 16px",
+              width: "408px",
+            }}
+          >
+            <MenuItem value="" disabled>
+              โปรดเลือกงบประมาณ
+            </MenuItem>
+            <MenuItem value="งบ1">งบ 1</MenuItem>
+            <MenuItem value="งบ2">งบ 2</MenuItem>
+          </Select>
+        )}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            flexDirection: "row",
+          }}
+        >
+          {renderSection(
+            "/icons_page/profile.svg",
+            "วันที่ให้บริการ *",
+            <Select
+              fullWidth
+              defaultValue=""
+              displayEmpty
+              sx={{
+                height: "48px",
+                backgroundColor: "#F5F9FF",
+                borderRadius: "8px",
+                color: "#B3B3B3",
+                "& .MuiSelect-icon": { color: "#407BF1" },
+                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                padding: "8px 16px",
+                width: "195px",
+              }}
+            >
+              <MenuItem value="" disabled>
+                โปรดเลือกงบประมาณ
+              </MenuItem>
+              <MenuItem value="งบ1">งบ 1</MenuItem>
+              <MenuItem value="งบ2">งบ 2</MenuItem>
+            </Select>
+          )}
+          {renderSection(
+            "/icons_page/profile.svg",
+            "ระยะทาง (กม.)",
+            <Select
+              fullWidth
+              defaultValue=""
+              displayEmpty
+              sx={{
+                height: "48px",
+                backgroundColor: "#F5F9FF",
+                borderRadius: "8px",
+                color: "#B3B3B3",
+                "& .MuiSelect-icon": { color: "#407BF1" },
+                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                padding: "8px 16px",
+                width: "195px",
+              }}
+            >
+              <MenuItem value="" disabled>
+                โปรดเลือกงบประมาณ
+              </MenuItem>
+              <MenuItem value="งบ1">งบ 1</MenuItem>
+              <MenuItem value="งบ2">งบ 2</MenuItem>
+            </Select>
+          )}
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            flexDirection: "row",
+          }}
+        >
+          {renderSection(
+            "/icons_page/profile.svg",
+            "เวลาออกจากจุดรับผู้ป่วย",
+            <Select
+              fullWidth
+              defaultValue=""
+              displayEmpty
+              sx={{
+                height: "48px",
+                backgroundColor: "#F5F9FF",
+                borderRadius: "8px",
+                color: "#B3B3B3",
+                "& .MuiSelect-icon": { color: "#407BF1" },
+                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                padding: "8px 16px",
+                width: "195px",
+              }}
+            >
+              <MenuItem value="" disabled>
+                โปรดเลือกงบประมาณ
+              </MenuItem>
+              <MenuItem value="งบ1">งบ 1</MenuItem>
+              <MenuItem value="งบ2">งบ 2</MenuItem>
+            </Select>
+          )}
+          {renderSection(
+            "/icons_page/profile.svg",
+            "เวลาถึงจุดส่งผู้ป่วย",
+            <Select
+              fullWidth
+              defaultValue=""
+              displayEmpty
+              sx={{
+                height: "48px",
+                backgroundColor: "#F5F9FF",
+                borderRadius: "8px",
+                color: "#B3B3B3",
+                "& .MuiSelect-icon": { color: "#407BF1" },
+                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
+                padding: "8px 16px",
+                width: "195px",
+              }}
+            >
+              <MenuItem value="" disabled>
+                โปรดเลือก
+              </MenuItem>
+              <MenuItem value="งบ1">งบ 1</MenuItem>
+              <MenuItem value="งบ2">งบ 2</MenuItem>
+            </Select>
+          )}
+        </Box>
       </Box>
-
       <Button sx={{ width: "439px" }} variant="contained" color="primary">
         บันทึกข้อมูล
       </Button>
@@ -185,46 +391,259 @@ const ScreeningForm = () => {
 const EvaluationResultSuccess = () => (
   <Box
     sx={{
-      backgroundColor: COLORS.background,
+      backgroundColor: COLORS.primary100,
       width: "100%",
-      height: "872px",
+      height: "100vh",
       borderRadius: "18px",
-      padding: "18px",
+      padding: "16px",
       display: "flex",
       flexDirection: "column",
-      gap: "20px",
-      flexGrow: 1,
+      alignItems: "center",
+      gap: "16px",
     }}
   >
-    <Typography variant="h6" sx={{ fontWeight: "bold", marginBottom: "16px" }}>
-      ผลการประเมินเคส
-    </Typography>
-
+    {/* Header */}
     <Box
       sx={{
-        backgroundColor: COLORS.success,
-        color: "#FFFFFF",
-        padding: "8px 16px",
-        borderRadius: "8px",
-        marginBottom: "16px",
+        justifyContent: "space-between",
+        width: "100%",
+        maxWidth: "439px",
       }}
     >
-      สามารถเดินทางได้
+      <Typography
+        sx={{
+          fontWeight: "bold",
+          fontSize: "16px",
+          color: "#407BF1",
+        }}
+      >
+        ผลการประเมินเคส
+      </Typography>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <Typography
+          sx={{
+            fontWeight: "normal",
+            fontSize: "14px",
+            color: COLORS.gray500,
+          }}
+        >
+          วันที่บันทึก : 16/11/2024
+        </Typography>
+        <Typography
+          sx={{
+            fontWeight: "normal",
+            fontSize: "14px",
+            color: COLORS.gray500,
+          }}
+        >
+          ผู้บันทึก : สุขสันต์ วงค์สว่าง
+        </Typography>
+      </Box>
     </Box>
 
-    <Typography>งบประมาณ: กองทุนหลักประกันสุขภาพ</Typography>
-    <Typography>ประเภทการรับส่ง: รถพยาบาล</Typography>
-    <Typography>รูปแบบการเดินทาง: แบบต่อเดียว</Typography>
-    <Typography>วันที่ให้บริการ: 12/02/2568</Typography>
-
-    <Button
-      fullWidth
-      variant="contained"
-      color="primary"
-      sx={{ marginTop: "16px" }}
+    {/* Success Box */}
+    <Box
+      sx={{
+        width: "439px",
+        height: "80px",
+        backgroundColor: COLORS.success200,
+        borderRadius: "18px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
     >
-      ดำเนินการ
-    </Button>
+      <Typography
+        sx={{
+          fontWeight: "bold",
+          fontSize: "24px",
+          color: COLORS.font_color,
+        }}
+      >
+        สามารถเดินทางได้
+      </Typography>
+    </Box>
+
+    {/* Information List */}
+    <Box
+      sx={{
+        width: "100%",
+        maxWidth: "439px",
+        backgroundColor: COLORS.primary100,
+        borderRadius: "12px",
+        padding: "16px",
+        display: "flex",
+        flexDirection: "column",
+        gap: "8px",
+      }}
+    >
+      {[
+        { label: "เบิกงบประมาณ :", value: "กองทุนท้องถิ่น (กปท.)" },
+        { label: "ประเภทรถรับส่ง :", value: "รถแท็กซี่" },
+        { label: "ชื่อหน่วยบริการรับส่ง :", value: "Bolt" },
+        { label: "รูปแบบการเดินทาง :", value: "แบบต่อเดียว" },
+        { label: "ลิงก์กูเกิลแมป :", value: "-" },
+        { label: "วันที่ให้บริการ :", value: "12/02/2568" },
+        { label: "ระยะทาง (กม.)  :", value: "12 กม." },
+        { label: "เวลาออกจากจุดรับผู้ป่วย :", value: "10.00 น." },
+        { label: "เวลาถึงจุดส่งผู้ป่วย :", value: "13.00 น." },
+      ].map((item, index) => (
+        <Box
+          key={index}
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            fontSize: "14px",
+          }}
+        >
+          <Typography
+            sx={{
+              color: COLORS.primary,
+            }}
+          >
+            {item.label}
+          </Typography>
+          <Typography
+            sx={{
+              color: COLORS.gray,
+            }}
+          >
+            {item.value}
+          </Typography>
+        </Box>
+      ))}
+    </Box>
+
+    {/* Current Status */}
+    <Box
+      sx={{
+        width: "100%",
+        maxWidth: "439px",
+        padding: "16px",
+        borderTop: `1px solid ${COLORS.backgroundwhile}`,
+        display: "flex",
+        flexDirection: "column",
+        gap: "8px",
+      }}
+    >
+      <Typography
+        sx={{
+          fontSize: "16px",
+          fontWeight: "bold",
+          color: COLORS.primary,
+        }}
+      >
+        <img
+          src="/icons_page/profile.svg"
+          alt="icon"
+          style={{ width: "24px", height: "24px" }}
+        />
+        สถานะการดำเนินงานปัจจุบัน
+      </Typography>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <Typography
+          sx={{
+            color: COLORS.primary,
+          }}
+        >
+          ขาไป :
+        </Typography>
+        <Box
+          sx={{
+            height: "30px",
+            width: "113px",
+            borderRadius: "50px",
+            fontSize: "16px",
+            backgroundColor: COLORS.primary800,
+            color: COLORS.font_color,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          รอมอบหมาย
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <Typography
+          sx={{
+            color: COLORS.primary,
+          }}
+        >
+          ขากลับ :
+        </Typography>
+        <Box
+          sx={{
+            height: "30px",
+            width: "113px",
+            borderRadius: "50px",
+            fontSize: "16px",
+            backgroundColor: COLORS.gray700,
+            color: COLORS.font_color,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          ยังไม่มีข้อมูล
+        </Box>
+      </Box>
+    </Box>
+
+    {/* Buttons */}
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "space-between",
+        gap: "12px",
+        width: "100%",
+        maxWidth: "439px",
+      }}
+    >
+      <Button
+        sx={{
+          flex: 1,
+          height: "48px",
+          borderRadius: "8px",
+          fontSize: "16px",
+          backgroundColor: COLORS.backgroundwhile,
+          color: COLORS.primary650,
+          borderColor: COLORS.primary650,
+        }}
+        variant="outlined"
+      >
+        ยกเลิกการดำเนินการ
+      </Button>
+      <Button
+        sx={{
+          flex: 1,
+          height: "48px",
+          borderRadius: "8px", // ปรับขอบให้โค้งมนตาม UI
+          fontSize: "16px",
+          fontWeight: "bold",
+          backgroundColor: COLORS.primary650,
+        }}
+        variant="contained"
+        color="primary"
+      >
+        ดำเนินการ
+      </Button>
+    </Box>
   </Box>
 );
 
@@ -232,97 +651,130 @@ const EvaluationResultSuccess = () => (
 const EvaluationResultFailure = () => (
   <Box
     sx={{
-      backgroundColor: COLORS.background,
+      backgroundColor: COLORS.primary100,
       width: "100%",
-      height: "872px",
+      height: "100vh",
       borderRadius: "18px",
-      padding: "18px",
+      padding: "16px",
       display: "flex",
       flexDirection: "column",
-      gap: "20px",
-      flexGrow: 1,
+      alignItems: "center",
+      gap: "16px",
     }}
   >
-    <Typography variant="h6" sx={{ fontWeight: "bold", marginBottom: "16px" }}>
-      ผลการประเมินเคส
-    </Typography>
-
+    {/* Header */}
     <Box
       sx={{
-        backgroundColor: COLORS.danger,
-        color: "#FFFFFF",
-        padding: "8px 16px",
-        borderRadius: "8px",
-        marginBottom: "16px",
+        justifyContent: "space-between",
+        width: "100%",
+        maxWidth: "439px",
       }}
     >
-      ไม่สามารถเดินทางได้
+      <Typography
+        sx={{
+          fontWeight: "bold",
+          fontSize: "16px",
+          color: "#407BF1",
+        }}
+      >
+        ผลการประเมินเคส
+      </Typography>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        <Typography
+          sx={{
+            fontWeight: "normal",
+            fontSize: "14px",
+            color: COLORS.gray500,
+          }}
+        >
+          วันที่บันทึก : 16/11/2024
+        </Typography>
+        <Typography
+          sx={{
+            fontWeight: "normal",
+            fontSize: "14px",
+            color: COLORS.gray500,
+          }}
+        >
+          ผู้บันทึก : สุขสันต์ วงค์สว่าง
+        </Typography>
+      </Box>
     </Box>
 
-    <Typography>เหตุผล: ผู้ป่วยยกเลิกนัดหมาย</Typography>
-    <Typography>หมายเหตุ: -</Typography>
-
-    <Button
-      fullWidth
-      variant="contained"
-      color="primary"
-      sx={{ marginTop: "16px" }}
+    {/* Success Box */}
+    <Box
+      sx={{
+        width: "439px",
+        height: "80px",
+        backgroundColor: COLORS.danger700,
+        borderRadius: "18px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
     >
-      ยกเลิกการดำเนินการ
-    </Button>
+      <Typography
+        sx={{
+          fontWeight: "bold",
+          fontSize: "24px",
+          color: COLORS.font_color,
+        }}
+      >
+        ไม่สามารถเดินทางได้
+      </Typography>
+    </Box>
+
+    {/* Information List */}
+    <Box
+      sx={{
+        width: "100%",
+        maxWidth: "439px",
+        backgroundColor: COLORS.primary100,
+        borderRadius: "12px",
+        padding: "16px",
+        display: "flex",
+        flexDirection: "column",
+        gap: "8px",
+      }}
+    >
+      {[
+        { label: "เหตุผล : ", value: "ผู้ป่วยยกเลิกนัดหมาย" },
+        { label: "หมายเหตุ : ", value: "หมายเหตุ" },
+      ].map((item, index) => (
+        <Box
+          key={index}
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            fontSize: "14px",
+          }}
+        >
+          <Typography
+            sx={{
+              color: COLORS.primary,
+            }}
+          >
+            {item.label}
+          </Typography>
+          <Typography
+            sx={{
+              color: COLORS.gray,
+            }}
+          >
+            {item.value}
+          </Typography>
+        </Box>
+      ))}
+    </Box>
+
+    {/* Current Status */}
   </Box>
 );
 
 // Export Components
 export { ScreeningForm, EvaluationResultSuccess, EvaluationResultFailure };
-{
-  /* <RadioGroup row>
-      <FormControlLabel
-        value="ได้"
-        control={<Radio color="primary" />}
-        label="สามารถเดินทางได้"
-      />
-      <FormControlLabel
-        value="ไม่ได้"
-        control={<Radio color="primary" />}
-        label="ไม่สามารถเดินทางได้"
-      />
-    </RadioGroup> */
-}
-
-{
-  /* <Select fullWidth defaultValue="" sx={{ marginBottom: "16px" }}>
-      <MenuItem value="">เลือกงบประมาณ</MenuItem>
-      <MenuItem value="งบ1">งบ 1</MenuItem>
-      <MenuItem value="งบ2">งบ 2</MenuItem>
-    </Select> */
-}
-
-{
-  /* <RadioGroup row>
-      <FormControlLabel
-        value="single"
-        control={<Radio color="primary" />}
-        label="แบบต่อเดียว"
-      />
-      <FormControlLabel
-        value="multi"
-        control={<Radio color="primary" />}
-        label="แบบหลายต่อ"
-      />
-    </RadioGroup> */
-}
-
-{
-  /* <TextField fullWidth label="จุดรับผู้ป่วย" sx={{ marginBottom: "16px" }} /> */
-}
-
-{
-  /* <TextField
-      fullWidth
-      label="วันที่ให้บริการ"
-      type="date"
-      InputLabelProps={{ shrink: true }}
-      sx={{ marginBottom: "16px" }}
-    /> */
-}

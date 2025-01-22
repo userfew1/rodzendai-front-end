@@ -2,13 +2,23 @@
 export const COLORS = {
   primary: "#407BF1",
   primary100: "#F4F8FF",
+  primary800: "#6A9BFF",
+  primary650: "#548AF6",
   secondary: "#FFA748",
   textPrimary: "#333333",
+  gray:"#4F4F4F",
+  gray700:"#B3B3B3",
+  gray500:"#808080",
+  
+  
   secondary100: "#FBFBFB",
   background: "#F8F9FD",
-
+  success200:"#52C0BC",
+  
   success: "#2ECC71",
   danger: "#E74C3C",
+  danger700: "#F68671",
+  
   font: "#333333",
   textSecondary: "#4F4F4F",
   backgroundwhile: "#ffffff",

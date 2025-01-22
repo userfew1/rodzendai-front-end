@@ -12,6 +12,7 @@ const ProfileCard = () => (
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
+      boxShadow: "0px 2px 4px 0px rgba(0, 0, 0, 0.05)", // เงาตามกำหนด
     }}
   >
     <Typography
