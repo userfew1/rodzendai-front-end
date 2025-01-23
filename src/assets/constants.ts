@@ -12,7 +12,7 @@ export const COLORS = {
   
   
   secondary100: "#FBFBFB",
-  background: "#F8F9FD",
+  background100: "#F8F9FD",
   success200:"#52C0BC",
   
   success: "#2ECC71",
@@ -21,7 +21,7 @@ export const COLORS = {
   
   font: "#333333",
   textSecondary: "#4F4F4F",
-  backgroundwhile: "#ffffff",
+  background: "#ffffff",
   font_color: "#ffffff",
 };
 

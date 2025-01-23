@@ -116,12 +116,12 @@ const NewCases: React.FC = () => {
     tabIndex === 0
       ? rows
       : rows.filter((row) =>
-          tabIndex === 1
-            ? row.status === "รอคัดกรอง"
-            : tabIndex === 2
+        tabIndex === 1
+          ? row.status === "รอคัดกรอง"
+          : tabIndex === 2
             ? row.status === "ได้"
             : row.status === "ไม่ได้"
-        );
+      );
 
   const statusColors: Record<string, string> = {
     ได้: "#99D4D2",
@@ -140,6 +140,7 @@ const NewCases: React.FC = () => {
       sx={{
         padding: "16px",
         minHeight: "100vh",
+        marginBottom: "100px",
       }}
     >
       {/* Header */}
@@ -395,6 +396,7 @@ const NewCases: React.FC = () => {
           }}
         />
       </Box>
+      
     </Box>
   );
 };

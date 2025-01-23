@@ -9,13 +9,21 @@ import {
   FormControlLabel,
   Select,
   MenuItem,
+  InputAdornment,
 } from "@mui/material";
 import { COLORS } from "../assets/constants";
+import DatePicker from "react-datepicker";
 const ScreeningForm = () => {
-  const [selectedValue, setSelectedValue] = useState("");
-  const handleChange = (event: {
+  const [selectedValueCases, setSelectedValueCases] = useState("");
+  const [selectedValueTravel, setSelectedValueTravel] = useState("");
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const handleChangeCases = (event: {
     target: { value: React.SetStateAction<string> };
-  }) => setSelectedValue(event.target.value);
+  }) => setSelectedValueCases(event.target.value);
+
+  const handleChangeTravel = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => setSelectedValueTravel(event.target.value);
 
   const renderSection = (
     icon: string,
@@ -73,7 +81,7 @@ const ScreeningForm = () => {
         sx={{
           width: "439px",
           height: "734px",
-          backgroundColor: COLORS.backgroundwhile,
+          backgroundColor: COLORS.background,
           borderRadius: "18px",
           padding: "16px 0px 0px 16px ",
           display: "flex",
@@ -82,12 +90,12 @@ const ScreeningForm = () => {
         }}
       >
         {renderSection(
-          "/icons_page/profile.svg",
+          "/icons_page/sheet.svg",
           "การประเมินเคส",
           <RadioGroup
             row
-            value={selectedValue}
-            onChange={handleChange}
+            value={selectedValueCases}
+            onChange={handleChangeCases}
             sx={{ justifyContent: "space-between" }}
           >
             {["ได้", "ไม่ได้"].map((option) => (
@@ -97,7 +105,7 @@ const ScreeningForm = () => {
                 control={
                   <Radio
                     sx={{
-                      color: selectedValue === option ? "#407BF1" : "#B3B3B3",
+                      color: selectedValueCases === option ? "#407BF1" : "#B3B3B3",
                       "&.Mui-checked": { color: "#407BF1" },
                     }}
                   />
@@ -105,7 +113,7 @@ const ScreeningForm = () => {
                 label={
                   <span
                     style={{
-                      color: selectedValue === option ? "#407BF1" : "#B3B3B3",
+                      color: selectedValueCases === option ? "#407BF1" : "#B3B3B3",
                     }}
                   >
                     {option === "ได้"
@@ -120,38 +128,18 @@ const ScreeningForm = () => {
         )}
 
         {renderSection(
-          "/icons_page/profile.svg",
+          "/icons_page/money.svg",
           "เบิกงบประมาณ",
-          <Select
-            fullWidth
-            defaultValue=""
-            displayEmpty
-            sx={{
-              height: "48px",
-              backgroundColor: "#F5F9FF",
-              borderRadius: "8px",
-              color: "#B3B3B3",
-              "& .MuiSelect-icon": { color: "#407BF1" },
-              "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-              padding: "8px 16px",
-              width: "408px",
-            }}
-          >
-            <MenuItem value="" disabled>
-              โปรดเลือกงบประมาณ
-            </MenuItem>
-            <MenuItem value="งบ1">งบ 1</MenuItem>
-            <MenuItem value="งบ2">งบ 2</MenuItem>
-          </Select>
+          <CustomSelect />
         )}
 
         {renderSection(
-          "/icons_page/profile.svg",
+          "/icons_page/ambulance.svg",
           "รูปแบบการเดินทาง *",
           <RadioGroup
             row
-            value={selectedValue}
-            onChange={handleChange}
+            value={selectedValueTravel}
+            onChange={handleChangeTravel}
             sx={{ justifyContent: "space-between" }}
           >
             {["ได้", "ไม่ได้"].map((option) => (
@@ -161,7 +149,7 @@ const ScreeningForm = () => {
                 control={
                   <Radio
                     sx={{
-                      color: selectedValue === option ? "#407BF1" : "#B3B3B3",
+                      color: selectedValueTravel === option ? "#407BF1" : "#B3B3B3",
                       "&.Mui-checked": { color: "#407BF1" },
                     }}
                   />
@@ -169,7 +157,7 @@ const ScreeningForm = () => {
                 label={
                   <span
                     style={{
-                      color: selectedValue === option ? "#407BF1" : "#B3B3B3",
+                      color: selectedValueTravel === option ? "#407BF1" : "#B3B3B3",
                     }}
                   >
                     {option === "ได้" ? "แบบต่อเดียว" : "แบบหลายต่อ"}
@@ -187,13 +175,26 @@ const ScreeningForm = () => {
             flexDirection: "row",
           }}
         >
+
           {renderSection(
-            "/icons_page/profile.svg",
+            "/icons_page/category.svg",
             "ประเภทรถรับส่ง *",
             <Select
               fullWidth
               defaultValue=""
               displayEmpty
+              IconComponent={() => (
+                <Box
+                  component="img"
+                  src="/icons_page/drop_down.svg" // ใช้ URL สำหรับไฟล์ SVG
+                  alt="dropdown icon"
+                  sx={{
+                    width: "20px",
+                    height: "20px",
+                    color: "#407BF1",
+                  }}
+                />
+              )}
               sx={{
                 height: "48px",
                 backgroundColor: "#F5F9FF",
@@ -206,19 +207,33 @@ const ScreeningForm = () => {
               }}
             >
               <MenuItem value="" disabled>
-                โปรดเลือกงบประมาณ
+                ประเภทรถรับส่ง
               </MenuItem>
               <MenuItem value="งบ1">งบ 1</MenuItem>
               <MenuItem value="งบ2">งบ 2</MenuItem>
             </Select>
           )}
           {renderSection(
-            "/icons_page/profile.svg",
+            "/icons_page/company.svg",
             "ชื่อหน่วยบริการรับส่ง *",
+
             <Select
               fullWidth
               defaultValue=""
               displayEmpty
+              IconComponent={() => (
+                <Box
+                  component="img"
+                  src="/icons_page/drop_down.svg" // ใช้ URL สำหรับไฟล์ SVG
+                  alt="dropdown icon"
+                  sx={{
+                    width: "20px",
+                    height: "20px",
+                    color: "#407BF1",
+                  }}
+                />
+              )}
+
               sx={{
                 height: "48px",
                 backgroundColor: "#F5F9FF",
@@ -231,7 +246,7 @@ const ScreeningForm = () => {
               }}
             >
               <MenuItem value="" disabled>
-                โปรดเลือกงบประมาณ
+                ชื่อหน่วยบริการ
               </MenuItem>
               <MenuItem value="งบ1">งบ 1</MenuItem>
               <MenuItem value="งบ2">งบ 2</MenuItem>
@@ -239,30 +254,31 @@ const ScreeningForm = () => {
           )}
         </Box>
         {renderSection(
-          "/icons_page/profile.svg",
+          "/icons_page/location.svg",
           "จุดรับส่งผู้ป่วย (ลิงก์กูเกิลแมป) ",
-          <Select
+          <TextField
             fullWidth
-            defaultValue=""
-            displayEmpty
+            placeholder="ลิงก์กูเกิลแมป"
             sx={{
               height: "48px",
               backgroundColor: "#F5F9FF",
               borderRadius: "8px",
               color: "#B3B3B3",
-              "& .MuiSelect-icon": { color: "#407BF1" },
-              "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-              padding: "8px 16px",
+              "& .MuiOutlinedInput-notchedOutline": {
+                border: "none",
+              },
+              "& .MuiInputBase-root": {
+                padding: "8px 16px",
+                height: "48px",
+                borderRadius: "8px",
+                backgroundColor: "#F5F9FF",
+            
+              },
               width: "408px",
             }}
-          >
-            <MenuItem value="" disabled>
-              โปรดเลือกงบประมาณ
-            </MenuItem>
-            <MenuItem value="งบ1">งบ 1</MenuItem>
-            <MenuItem value="งบ2">งบ 2</MenuItem>
-          </Select>
+          />
         )}
+
         <Box
           sx={{
             display: "flex",
@@ -271,32 +287,56 @@ const ScreeningForm = () => {
           }}
         >
           {renderSection(
-            "/icons_page/profile.svg",
+            "/icons_page/calendar.svg",
             "วันที่ให้บริการ *",
-            <Select
-              fullWidth
-              defaultValue=""
-              displayEmpty
-              sx={{
-                height: "48px",
-                backgroundColor: "#F5F9FF",
-                borderRadius: "8px",
-                color: "#B3B3B3",
-                "& .MuiSelect-icon": { color: "#407BF1" },
-                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                padding: "8px 16px",
-                width: "195px",
-              }}
-            >
-              <MenuItem value="" disabled>
-                โปรดเลือกงบประมาณ
-              </MenuItem>
-              <MenuItem value="งบ1">งบ 1</MenuItem>
-              <MenuItem value="งบ2">งบ 2</MenuItem>
-            </Select>
+            <DatePicker
+            selected={selectedDate}
+            onChange={(date) => setSelectedDate(date)}
+            customInput={
+              <TextField
+                fullWidth
+                placeholder="เลือกวันที่"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <Box
+                        component="img"
+                        src="/icons_page/calendar_b.svg" // ใช้ไอคอนของคุณ
+                        alt="calendar icon"
+                        sx={{
+                          width: "20px",
+                          height: "20px",
+                          cursor: "pointer",
+                        }}
+                      />
+                    </InputAdornment>
+                  ),
+                }}
+                sx={{
+                  height: "48px",
+                  backgroundColor: "#F5F9FF",
+                  borderRadius: "8px",
+                  "& .MuiOutlinedInput-root": {
+                    padding: "8px 16px",
+                    height: "48px",
+                    borderRadius: "8px",
+                    backgroundColor: "#F5F9FF",
+                  },
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    border: "none",
+                  },
+                  "& .MuiInputBase-input": {
+                    color: "#B3B3B3",
+                  },
+                  width: "195px",
+                }}
+              />
+            }
+          />
+
           )}
           {renderSection(
-            "/icons_page/profile.svg",
+            "/icons_page/km.svg",
             "ระยะทาง (กม.)",
             <Select
               fullWidth
@@ -329,7 +369,7 @@ const ScreeningForm = () => {
           }}
         >
           {renderSection(
-            "/icons_page/profile.svg",
+            "/icons_page/time.svg",
             "เวลาออกจากจุดรับผู้ป่วย",
             <Select
               fullWidth
@@ -354,7 +394,7 @@ const ScreeningForm = () => {
             </Select>
           )}
           {renderSection(
-            "/icons_page/profile.svg",
+            "/icons_page/time.svg",
             "เวลาถึงจุดส่งผู้ป่วย",
             <Select
               fullWidth
@@ -410,15 +450,28 @@ const EvaluationResultSuccess = () => (
         maxWidth: "439px",
       }}
     >
-      <Typography
+      <Box
         sx={{
-          fontWeight: "bold",
-          fontSize: "16px",
-          color: "#407BF1",
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
         }}
       >
-        ผลการประเมินเคส
-      </Typography>
+        <img
+          src="/icons_page/evaluation_b.svg"
+          alt="icon"
+          style={{ width: "24px", height: "24px" }}
+        />
+        <Typography
+          sx={{
+            fontWeight: "bold",
+            fontSize: "16px",
+            color: "#407BF1",
+          }}
+        >
+          ผลการประเมินเคส
+        </Typography>
+      </Box>
       <Box
         sx={{
           display: "flex",
@@ -525,7 +578,7 @@ const EvaluationResultSuccess = () => (
         width: "100%",
         maxWidth: "439px",
         padding: "16px",
-        borderTop: `1px solid ${COLORS.backgroundwhile}`,
+        borderTop: `1px solid ${COLORS.background}`,
         display: "flex",
         flexDirection: "column",
         gap: "8px",
@@ -536,10 +589,12 @@ const EvaluationResultSuccess = () => (
           fontSize: "16px",
           fontWeight: "bold",
           color: COLORS.primary,
+          display: "flex",
+          justifyContent: "start",
         }}
       >
         <img
-          src="/icons_page/profile.svg"
+          src="/icons_page/status.svg"
           alt="icon"
           style={{ width: "24px", height: "24px" }}
         />
@@ -613,6 +668,7 @@ const EvaluationResultSuccess = () => (
         gap: "12px",
         width: "100%",
         maxWidth: "439px",
+        marginTop: "auto",
       }}
     >
       <Button
@@ -621,7 +677,7 @@ const EvaluationResultSuccess = () => (
           height: "48px",
           borderRadius: "8px",
           fontSize: "16px",
-          backgroundColor: COLORS.backgroundwhile,
+          backgroundColor: COLORS.background,
           color: COLORS.primary650,
           borderColor: COLORS.primary650,
         }}
@@ -676,7 +732,12 @@ const EvaluationResultFailure = () => (
           fontSize: "16px",
           color: "#407BF1",
         }}
-      >
+      ><img
+          src="/icons_page/evaluation_b.svg"
+          alt="icon"
+          style={{ width: "24px", height: "24px" }}
+        />
+
         ผลการประเมินเคส
       </Typography>
       <Box
@@ -778,3 +839,58 @@ const EvaluationResultFailure = () => (
 
 // Export Components
 export { ScreeningForm, EvaluationResultSuccess, EvaluationResultFailure };
+
+
+export default function CustomSelect() {
+  const [open, setOpen] = useState(false);
+
+  const handleToggle = () => {
+    setOpen(!open);
+  };
+
+  return (
+    <Select
+      fullWidth
+      defaultValue=""
+      displayEmpty
+      open={open}
+      onClose={() => setOpen(false)}
+      onOpen={() => setOpen(true)}
+      IconComponent={() => (
+        <Box
+          component="img"
+          src="/icons_page/drop_down.svg"
+          alt="dropdown icon"
+          onClick={handleToggle} // เพิ่มความสามารถให้คลิกได้
+          sx={{
+            width: "20px",
+            height: "20px",
+            cursor: "pointer", // แสดงเป็นปุ่มเมื่อวางเมาส์
+            color: "#407BF1",
+          }}
+        />
+      )}
+      sx={{
+        height: "48px",
+        backgroundColor: "#F5F9FF",
+        borderRadius: "8px",
+        color: "#B3B3B3",
+        "& .MuiOutlinedInput-notchedOutline": {
+          border: "none",
+        },
+        "& .MuiSelect-icon": {
+          top: "calc(50% - 10px)", // จัดตำแหน่งไอคอนให้ตรงกลาง
+        },
+        padding: "8px 16px",
+        width: "408px",
+      }}
+    >
+      <MenuItem value="" disabled>
+        โปรดเลือกงบประมาณ
+      </MenuItem>
+      <MenuItem value="งบ1">งบ 1</MenuItem>
+      <MenuItem value="งบ2">งบ 2</MenuItem>
+    </Select>
+  );
+}
+

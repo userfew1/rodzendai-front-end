@@ -236,7 +236,7 @@ const CaseDetails: React.FC = () => {
         sx={{
           width: "551px",
           height: "1024px",
-          backgroundColor: COLORS.backgroundwhile,
+          backgroundColor: COLORS.background,
           boxSizing: "border-box",
           marginRight: "-32px",
           marginTop: "-35px",

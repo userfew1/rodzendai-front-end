@@ -1,21 +1,21 @@
-#root {
-  background-color: #ffffff; /* สีพื้นหลัง */
-  width: 100%; /* ให้เต็มพื้นที่ของหน้าจอ */
-  max-width: 1440px; /* จำกัดความกว้างสูงสุดที่ 1440px */
-  max-height: 1024px; /* ความสูงขึ้นอยู่กับเนื้อหา */
+/* #root {
+  background-color: #ffffff; 
+  width: 100%; 
+  max-width: 1440px; 
+  max-height: 1024px; 
 }
 
 body {
-  margin: 0; /* ลบ margin เริ่มต้น */
-  padding: 0; /* ลบ padding เริ่มต้น */
-  background-color: #ffffff; /* สีพื้นหลัง */
-  display: flex; /* ใช้ Flexbox */
-  justify-content: center; /* จัดวางให้อยู่กลางแนวนอน */
-  align-items: center; /* จัดวางให้อยู่กลางแนวตั้ง */
-  max-height: 1024px; /* ใช้ความสูงเต็มหน้าจอ */
-}
+  margin: 0; 
+  padding: 0; 
+  background-color: #ffffff;
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  max-height: 1024px; 
+} */
 
-/* html, body {
+html, body {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -33,4 +33,4 @@ body {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
   border-radius: 0px; 
   overflow: hidden;
-} */
+} 

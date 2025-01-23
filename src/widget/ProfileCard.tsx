@@ -12,131 +12,152 @@ const ProfileCard = () => (
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      boxShadow: "0px 2px 4px 0px rgba(0, 0, 0, 0.05)", // เงาตามกำหนด
+      boxShadow: "0px 2px 4px 0px rgba(0, 0, 0, 0.05)",
     }}
   >
-    <Typography
-      variant="body1"
-      sx={{
-        fontWeight: "bold",
-        color: "#4F4F4F",
-        marginBottom: "8px",
-        textAlign: "center",
-      }}
-    >
-      <img
-        src="/man.svg"
-        alt="Icon"
-        style={{ width: "24px", height: "24px" }}
-      />
-      ปิยะพัทธ์ ยิ่งงาม
+    <ProfileHeader />
+    <ProfileDetails />
+    <ContactInfo />
+    <AdditionalInfo />
+    <Divider />
+    <ProfileFooter />
+  </Paper>
+);
+
+const ProfileHeader = () => (
+  <Typography
+    variant="body1"
+    sx={{
+      fontWeight: "bold",
+      color: "#4F4F4F",
+      marginBottom: "8px",
+      textAlign: "center",
+    }}
+  >
+    <img src="/man.svg" alt="Icon" style={{ width: "24px", height: "24px" }} />
+    ปิยะพัทธ์ ยิ่งงาม
+  </Typography>
+);
+
+const ProfileDetails = () => (
+  <Box
+    sx={{
+      textAlign: "center",
+      display: "flex",
+      justifyContent: "center",
+      gap: "12px",
+    }}
+  >
+    <Typography sx={{ color: "#4F4F4F" }}>
+      <Typography component="span" sx={{ color: "#407BF1" }}>
+        ประเภทผู้ป่วย:
+      </Typography>{" "}
+      ผู้พิการ
     </Typography>
-    <Box
+    <Typography sx={{ color: "#4F4F4F" }}>
+      <Typography component="span" sx={{ color: "#407BF1" }}>
+        ประเภทการบริการ:
+      </Typography>{" "}
+      กองทุนท้องถิ่น (กปท.)
+    </Typography>
+  </Box>
+);
+
+const ContactInfo = () => (
+  <Box
+    sx={{
+      height: "22px",
+      width: "319px",
+      backgroundColor: "#FFA748",
+      borderRadius: "30px",
+      textAlign: "center",
+      fontWeight: "bold",
+      fontSize: "16px",
+      color: "white",
+    }}
+  >
+    092 3333333 (หลัก), 092 3333333 (รอง)
+  </Box>
+);
+
+const AdditionalInfo = () => (
+  <Box
+    sx={{
+      textAlign: "center",
+      display: "flex",
+      justifyContent: "center",
+      gap: "12px",
+      marginTop: "8px",
+    }}
+  >
+    <Typography sx={{ color: "#808080", display: "flex", alignItems: "center" }}>
+      <img
+        src="/id.svg"
+        alt="Icon"
+        style={{ width: "24px", height: "24px", marginRight: "8px" }}
+      />{" "}
+      1 21 2234 23456 1
+    </Typography>
+    <Typography sx={{ color: "#808080", display: "flex", alignItems: "center" }}>
+      <img
+        src="/birthday.svg"
+        alt="Icon"
+        style={{ width: "24px", height: "24px", marginRight: "8px" }}
+      />{" "}
+      16/11/2000 (24 ปี)
+    </Typography>
+    <Typography
       sx={{
-        textAlign: "center",
+        color: "#548AF6",
+        textDecoration: "underline",
         display: "flex",
-        justifyContent: "center",
-        gap: "12px",
-      }}
-    >
-      <Typography sx={{ color: "#4F4F4F" }}>
-        <Typography component="span" sx={{ color: "#407BF1" }}>
-          ประเภทผู้ป่วย:
-        </Typography>{" "}
-        ผู้พิการ
-      </Typography>
-      <Typography sx={{ color: "#4F4F4F" }}>
-        <Typography component="span" sx={{ color: "#407BF1" }}>
-          ประเภทการบริการ:
-        </Typography>{" "}
-        กองทุนท้องถิ่น (กปท.)
-      </Typography>
-    </Box>
-    <Box
-      sx={{
-        height: "22px",
-        width: "319px",
-        backgroundColor: "#FFA748",
-        borderRadius: "30px",
-        textAlign: "center",
-        fontWeight: "bold",
-        fontSize: "16px",
-        color: "white",
-      }}
-    >
-      092 3333333 (หลัก), 092 3333333 (รอง)
-    </Box>
-    <Box
-      sx={{
-        textAlign: "center",
-        display: "flex",
-        justifyContent: "center",
-        gap: "12px",
-        marginTop: "8px",
-      }}
-    >
-      <Typography sx={{ color: "#808080" }}>
-        <img
-          src="/id.svg"
-          alt="Icon"
-          style={{ width: "24px", height: "24px" }}
-        />{" "}
-        1 21 2234 23456 1
-      </Typography>
-      <Typography sx={{ color: "#808080" }}>
-        <img
-          src="/birthday.svg"
-          alt="Icon"
-          style={{ width: "24px", height: "24px" }}
-        />{" "}
-        16/11/2000 (24 ปี)
-      </Typography>
-      <Typography sx={{ color: "#548AF6", textDecoration: "underline" }}>
-        <img
-          src="/birthday.svg"
-          alt="Icon"
-          style={{ width: "24px", height: "24px", marginRight: "8px" }}
-        />
-        ดูเอกสารบัตรประชาชน
-      </Typography>
-    </Box>
-    <Box
-      sx={{
-        width: "694px",
-        height: "1px",
-        backgroundColor: "#548AF6",
-        margin: "8px 0",
-      }}
-    />
-    <Box
-      sx={{
-        display: "flex",
-        gap: "12px",
-        width: "100%",
-        justifyContent: "start",
         alignItems: "center",
       }}
     >
-      <Typography sx={{ color: "#4F4F4F" }}>
-        <Typography
-          component="span"
-          sx={{ color: "#407BF1", marginRight: "4px" }}
-        >
-          ความสามารถในการเดินทาง:
-        </Typography>
-        ช่วยเหลือตัวเองได้
+      <img
+        src="/birthday.svg"
+        alt="Icon"
+        style={{ width: "24px", height: "24px", marginRight: "8px" }}
+      />
+      ดูเอกสารบัตรประชาชน
+    </Typography>
+  </Box>
+);
+
+const Divider = () => (
+  <Box
+    sx={{
+      width: "694px",
+      height: "1px",
+      backgroundColor: "#548AF6",
+      margin: "8px 0",
+    }}
+  />
+);
+
+const ProfileFooter = () => (
+  <Box
+    sx={{
+      display: "flex",
+      gap: "12px",
+      width: "100%",
+      justifyContent: "start",
+      alignItems: "center",
+    }}
+  >
+    <Typography sx={{ color: "#4F4F4F" }}>
+      <Typography component="span" sx={{ color: "#407BF1", marginRight: "4px" }}>
+        ความสามารถในการเดินทาง:
       </Typography>
-      <Typography sx={{ color: "#4F4F4F" }}>
-        <Typography
-          component="span"
-          sx={{ color: "#407BF1", marginRight: "4px" }}
-        >
-          การวินิจฉัยโรค:
-        </Typography>
-        ปวดหัว ตัวร้อน
+      ช่วยเหลือตัวเองได้
+    </Typography>
+    <Typography sx={{ color: "#4F4F4F" }}>
+      <Typography component="span" sx={{ color: "#407BF1", marginRight: "4px" }}>
+        การวินิจฉัยโรค:
       </Typography>
-    </Box>
-  </Paper>
+      ปวดหัว ตัวร้อน
+    </Typography>
+  </Box>
 );
 
 export default ProfileCard;
