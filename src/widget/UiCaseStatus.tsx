@@ -13,10 +13,24 @@ import {
 } from "@mui/material";
 import { COLORS } from "../assets/constants";
 import DatePicker from "react-datepicker";
+import { MiddlewareReturn } from "@floating-ui/core";
+import { MiddlewareState } from "@floating-ui/dom";
 const ScreeningForm = () => {
   const [selectedValueCases, setSelectedValueCases] = useState("");
   const [selectedValueTravel, setSelectedValueTravel] = useState("");
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedPhase, setselectedPhase] = useState("");
+  const [TimeStartpoint, setTimeStartpoint] = useState("");
+  const [TimeEndpoint, setTimeEndpoint] = useState("");
+
+  const handleDateInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value.replace(/\D/g, ""); // ลบตัวอักษรที่ไม่ใช่ตัวเลข
+    if (value.length > 2) value = value.slice(0, 2) + "/" + value.slice(2);
+    if (value.length > 5) value = value.slice(0, 5) + "/" + value.slice(5);
+    if (value.length > 10) value = value.slice(0, 10); // จำกัดความยาวที่ 10 ตัวอักษร
+    setSelectedDate(value);
+  };
   const handleChangeCases = (event: {
     target: { value: React.SetStateAction<string> };
   }) => setSelectedValueCases(event.target.value);
@@ -52,7 +66,6 @@ const ScreeningForm = () => {
     <Box
       sx={{
         backgroundColor: COLORS.primary100,
-        width: "100%",
         height: "872px",
         borderRadius: "18px",
         padding: "16px",
@@ -68,12 +81,18 @@ const ScreeningForm = () => {
           fontSize: "16px",
           color: "#407BF1",
           marginBottom: "16px",
-          textAlign: "left",
+          marginLeft: "16px",
           display: "flex",
-          justifyContent: "start",
-          flexDirection: "row",
+          alignItems: "center", // ไอคอนจัดกลางในบรรทัด
+          gap: "8px", // เพิ่มช่องว่างระหว่างไอคอนกับข้อความ
+          alignSelf: "flex-start", // ทำให้ Typography ชิดซ้าย
         }}
       >
+        <img
+          src="/icons_page/profile.svg"
+          alt="icon"
+          style={{ width: "24px", height: "24px" }}
+        />
         คัดกรองข้อมูล
       </Typography>
 
@@ -83,10 +102,11 @@ const ScreeningForm = () => {
           height: "734px",
           backgroundColor: COLORS.background,
           borderRadius: "18px",
-          padding: "16px 0px 0px 16px ",
+          padding: "16px 0px 0px 16px",
           display: "flex",
           justifyContent: "start",
           flexDirection: "column",
+          gap: "10px", // เพิ่มระยะห่างระหว่างแต่ละรายการ
         }}
       >
         {renderSection(
@@ -105,7 +125,8 @@ const ScreeningForm = () => {
                 control={
                   <Radio
                     sx={{
-                      color: selectedValueCases === option ? "#407BF1" : "#B3B3B3",
+                      color:
+                        selectedValueCases === option ? "#407BF1" : "#B3B3B3",
                       "&.Mui-checked": { color: "#407BF1" },
                     }}
                   />
@@ -113,7 +134,8 @@ const ScreeningForm = () => {
                 label={
                   <span
                     style={{
-                      color: selectedValueCases === option ? "#407BF1" : "#B3B3B3",
+                      color:
+                        selectedValueCases === option ? "#407BF1" : "#B3B3B3",
                     }}
                   >
                     {option === "ได้"
@@ -149,7 +171,8 @@ const ScreeningForm = () => {
                 control={
                   <Radio
                     sx={{
-                      color: selectedValueTravel === option ? "#407BF1" : "#B3B3B3",
+                      color:
+                        selectedValueTravel === option ? "#407BF1" : "#B3B3B3",
                       "&.Mui-checked": { color: "#407BF1" },
                     }}
                   />
@@ -157,7 +180,8 @@ const ScreeningForm = () => {
                 label={
                   <span
                     style={{
-                      color: selectedValueTravel === option ? "#407BF1" : "#B3B3B3",
+                      color:
+                        selectedValueTravel === option ? "#407BF1" : "#B3B3B3",
                     }}
                   >
                     {option === "ได้" ? "แบบต่อเดียว" : "แบบหลายต่อ"}
@@ -175,7 +199,6 @@ const ScreeningForm = () => {
             flexDirection: "row",
           }}
         >
-
           {renderSection(
             "/icons_page/category.svg",
             "ประเภทรถรับส่ง *",
@@ -233,7 +256,6 @@ const ScreeningForm = () => {
                   }}
                 />
               )}
-
               sx={{
                 height: "48px",
                 backgroundColor: "#F5F9FF",
@@ -272,7 +294,6 @@ const ScreeningForm = () => {
                 height: "48px",
                 borderRadius: "8px",
                 backgroundColor: "#F5F9FF",
-            
               },
               width: "408px",
             }}
@@ -289,76 +310,78 @@ const ScreeningForm = () => {
           {renderSection(
             "/icons_page/calendar.svg",
             "วันที่ให้บริการ *",
-            <DatePicker
-            selected={selectedDate}
-            onChange={(date) => setSelectedDate(date)}
-            customInput={
-              <TextField
-                fullWidth
-                placeholder="เลือกวันที่"
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <Box
-                        component="img"
-                        src="/icons_page/calendar_b.svg" // ใช้ไอคอนของคุณ
-                        alt="calendar icon"
-                        sx={{
-                          width: "20px",
-                          height: "20px",
-                          cursor: "pointer",
-                        }}
-                      />
-                    </InputAdornment>
-                  ),
-                }}
-                sx={{
-                  height: "48px",
-                  backgroundColor: "#F5F9FF",
-                  borderRadius: "8px",
-                  "& .MuiOutlinedInput-root": {
-                    padding: "8px 16px",
-                    height: "48px",
-                    borderRadius: "8px",
-                    backgroundColor: "#F5F9FF",
-                  },
-                  "& .MuiOutlinedInput-notchedOutline": {
-                    border: "none",
-                  },
-                  "& .MuiInputBase-input": {
-                    color: "#B3B3B3",
-                  },
-                  width: "195px",
-                }}
-              />
-            }
-          />
-
-          )}
-          {renderSection(
-            "/icons_page/km.svg",
-            "ระยะทาง (กม.)",
-            <Select
+            <TextField
               fullWidth
-              defaultValue=""
-              displayEmpty
+              placeholder="MM/DD/YYYY"
+              value={selectedDate}
+              onChange={handleDateInputChange}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <Box
+                      component="img"
+                      src="/icons_page/calendar_b.svg"
+                      alt="calendar icon"
+                      sx={{
+                        width: "20px",
+                        height: "20px",
+                        cursor: "pointer",
+                      }}
+                    />
+                  </InputAdornment>
+                ),
+              }}
               sx={{
                 height: "48px",
                 backgroundColor: "#F5F9FF",
                 borderRadius: "8px",
-                color: "#B3B3B3",
-                "& .MuiSelect-icon": { color: "#407BF1" },
-                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                padding: "8px 16px",
+                "& .MuiOutlinedInput-root": {
+                  padding: "8px 16px",
+                  height: "48px",
+                  borderRadius: "8px",
+                  backgroundColor: "#F5F9FF",
+                },
+                "& .MuiOutlinedInput-notchedOutline": {
+                  border: "none",
+                },
+                "& .MuiInputBase-input": {
+                  color: "#B3B3B3",
+                },
                 width: "195px",
               }}
-            >
-              <MenuItem value="" disabled>
-                โปรดเลือกงบประมาณ
-              </MenuItem>
-              <MenuItem value="งบ1">งบ 1</MenuItem>
-              <MenuItem value="งบ2">งบ 2</MenuItem>
-            </Select>
+            />
+          )}
+
+          {renderSection(
+            "/icons_page/km.svg",
+            "ระยะทาง (กม.)",
+            <TextField
+              fullWidth
+              placeholder="ระยะทาง (กม.)" // ข้อความแนะนำการกรอก
+              value={selectedPhase ? selectedPhase : ""} // แสดงวันที่ที่เลือกไว้
+              onChange={(e) => setselectedPhase(e.target.value)} // อัปเดตวันที่เมื่อกรอก
+              InputProps={{
+                endAdornment: <InputAdornment position="end"></InputAdornment>,
+              }}
+              sx={{
+                height: "48px",
+                backgroundColor: "#F5F9FF",
+                borderRadius: "8px",
+                "& .MuiOutlinedInput-root": {
+                  padding: "8px 16px",
+                  height: "48px",
+                  borderRadius: "8px",
+                  backgroundColor: "#F5F9FF",
+                },
+                "& .MuiOutlinedInput-notchedOutline": {
+                  border: "none",
+                },
+                "& .MuiInputBase-input": {
+                  color: "#B3B3B3",
+                },
+                width: "195px",
+              }}
+            />
           )}
         </Box>
         <Box
@@ -371,58 +394,108 @@ const ScreeningForm = () => {
           {renderSection(
             "/icons_page/time.svg",
             "เวลาออกจากจุดรับผู้ป่วย",
-            <Select
+            <TextField
               fullWidth
-              defaultValue=""
-              displayEmpty
+              placeholder="เวลา"
+              value={TimeStartpoint ? TimeStartpoint : ""} // แสดงวันที่ที่เลือกไว้
+              onChange={(e) => setTimeStartpoint(e.target.value)} // อัปเดตวันที่เมื่อกรอก
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <Box
+                      component="img"
+                      src="/icons_page/time_b.svg"
+                      alt="calendar icon"
+                      sx={{
+                        width: "20px",
+                        height: "20px",
+                        cursor: "pointer",
+                      }}
+                    />
+                  </InputAdornment>
+                ),
+              }}
               sx={{
                 height: "48px",
                 backgroundColor: "#F5F9FF",
                 borderRadius: "8px",
-                color: "#B3B3B3",
-                "& .MuiSelect-icon": { color: "#407BF1" },
-                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                padding: "8px 16px",
+                "& .MuiOutlinedInput-root": {
+                  padding: "8px 16px",
+                  height: "48px",
+                  borderRadius: "8px",
+                  backgroundColor: "#F5F9FF",
+                },
+                "& .MuiOutlinedInput-notchedOutline": {
+                  border: "none",
+                },
+                "& .MuiInputBase-input": {
+                  color: "#B3B3B3",
+                },
                 width: "195px",
               }}
-            >
-              <MenuItem value="" disabled>
-                โปรดเลือกงบประมาณ
-              </MenuItem>
-              <MenuItem value="งบ1">งบ 1</MenuItem>
-              <MenuItem value="งบ2">งบ 2</MenuItem>
-            </Select>
+            />
           )}
           {renderSection(
             "/icons_page/time.svg",
             "เวลาถึงจุดส่งผู้ป่วย",
-            <Select
+            <TextField
               fullWidth
-              defaultValue=""
-              displayEmpty
+              placeholder="เวลา"
+              value={TimeEndpoint ? TimeEndpoint : ""} // แสดงวันที่ที่เลือกไว้
+              onChange={(e) => setTimeEndpoint(e.target.value)} // อัปเดตวันที่เมื่อกรอก
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <Box
+                      component="img"
+                      src="/icons_page/time_b.svg"
+                      alt="calendar icon"
+                      sx={{
+                        width: "20px",
+                        height: "20px",
+                        cursor: "pointer",
+                      }}
+                    />
+                  </InputAdornment>
+                ),
+              }}
               sx={{
                 height: "48px",
                 backgroundColor: "#F5F9FF",
                 borderRadius: "8px",
-                color: "#B3B3B3",
-                "& .MuiSelect-icon": { color: "#407BF1" },
-                "& .MuiOutlinedInput-notchedOutline": { border: "none" },
-                padding: "8px 16px",
+                "& .MuiOutlinedInput-root": {
+                  padding: "8px 16px",
+                  height: "48px",
+                  borderRadius: "8px",
+                  backgroundColor: "#F5F9FF",
+                },
+                "& .MuiOutlinedInput-notchedOutline": {
+                  border: "none",
+                },
+                "& .MuiInputBase-input": {
+                  color: "#B3B3B3",
+                },
                 width: "195px",
               }}
-            >
-              <MenuItem value="" disabled>
-                โปรดเลือก
-              </MenuItem>
-              <MenuItem value="งบ1">งบ 1</MenuItem>
-              <MenuItem value="งบ2">งบ 2</MenuItem>
-            </Select>
+            />
           )}
         </Box>
       </Box>
-      <Button sx={{ width: "439px" }} variant="contained" color="primary">
+      <Box
+        sx={{
+          width: "439px",
+          height: "48px",
+          marginTop: "24px",
+          display: "flex",
+          backgroundColor: COLORS.primary650,
+          borderRadius: "8px",
+          justifyContent: "center",
+          alignItems: "center",
+          color:COLORS.font_color
+        }}
+      >
         บันทึกข้อมูล
-      </Button>
+      </Box>
     </Box>
   );
 };
@@ -732,12 +805,12 @@ const EvaluationResultFailure = () => (
           fontSize: "16px",
           color: "#407BF1",
         }}
-      ><img
+      >
+        <img
           src="/icons_page/evaluation_b.svg"
           alt="icon"
           style={{ width: "24px", height: "24px" }}
         />
-
         ผลการประเมินเคส
       </Typography>
       <Box
@@ -840,7 +913,6 @@ const EvaluationResultFailure = () => (
 // Export Components
 export { ScreeningForm, EvaluationResultSuccess, EvaluationResultFailure };
 
-
 export default function CustomSelect() {
   const [open, setOpen] = useState(false);
 
@@ -893,4 +965,3 @@ export default function CustomSelect() {
     </Select>
   );
 }
-

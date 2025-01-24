@@ -61,7 +61,7 @@ const Settings: React.FC = () => {
                 transition: "background-color 0.5s ease",
                 boxSizing: "border-box",
                 border: `1.5px solid ${
-                  selectedItem === item.id ? "#52C0BC" : "white"
+                  selectedItem === item.id ? "#52C0BC" : "0"
                 }`,
               }}
             >
@@ -209,7 +209,7 @@ const Settings: React.FC = () => {
             <Button
               sx={{
                 height: "48px",
-                backgroundColor: COLORS.primary,
+                backgroundColor: COLORS.primary650,
                 marginTop: "auto", // ให้ปุ่มอยู่ที่ล่างสุด
               }}
             >

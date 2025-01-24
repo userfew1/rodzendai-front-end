@@ -40,12 +40,14 @@ const EndfileCard = () => (
         ข้อมูลการขอใช้รถ
       </Typography>
       <Button
-        variant="contained"
+
         sx={{
           backgroundColor: "#FF8500",
           color: "white",
           borderRadius: "50px",
-          padding: "8px 16px",
+          padding: "0px 0px",
+          width: "131px",
+          height: "30px",
         }}
       >
         ขาไปและขากลับ

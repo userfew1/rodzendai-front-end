@@ -119,127 +119,151 @@ const CaseDetails: React.FC = () => {
   return (
     <Box
       sx={{
-        padding: "12px",
+        padding: "8px",
         display: "grid",
+        height: "921px",
         gridTemplateColumns: "2fr 1fr", // แบ่งคอลัมน์ซ้ายขวา
-        gap: "16px",
-        backgroundColor: "#F8FAFF",
-        
-        minHeight: "100vh",
+        backgroundColor: "#F8FAFF", // กำหนดตำแหน่งของ container
+       
       }}
     >
       {/* ข้อมูลด้านซ้าย */}
-
-      <Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            marginBottom: "16px",
-            
-          }}
-        >
-          <img
-            src="/drop_down.svg"
-            alt="Icon"
-            style={{
-              width: "24px",
-              height: "24px",
-              marginRight: "8px",
-              cursor: "pointer",
-            }}
-            onClick={handleBackClick}
-          />
-          <Typography
-            variant="h5"
+      <Box
+       sx={{
+        overflowY: "auto", // เปิดการเลื่อนแนวตั้ง
+        paddingRight: "8px", // เพิ่มระยะห่างขวาเพื่อให้ scrollbar ไม่บังเนื้อหา
+        height: "100%", // ตั้งความสูงเต็มพื้นที่ที่กำหนด
+        paddingBottom: "16px", // ระยะห่างด้านล่าง
+        "&::-webkit-scrollbar": {
+          width: "10px", // กำหนดความกว้างของ scrollbar
+        },
+        "&::-webkit-scrollbar-track": {
+          backgroundColor: COLORS.primary100, // สีพื้นหลังของ track
+          borderRadius: "10px", // ขอบโค้งของ track
+        },
+        "&::-webkit-scrollbar-thumb": {
+          backgroundColor: COLORS.primary100, // สีของ thumb (แถบเลื่อน)
+          borderRadius: "10px", // ขอบโค้งของ thumb
+        },
+        "&::-webkit-scrollbar-thumb:hover": {
+          backgroundColor: COLORS.primary100, // สีเมื่อ hover
+        },
+      }}
+      >
+        <Box>
+          <Box
             sx={{
-              fontWeight: "bold",
-              color: "#007BFF",
-              marginRight: "auto", // ทำให้ข้อความถัดไปชิดขวา
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              marginBottom: "16px",
             }}
           >
-            ปียะพักร์ ยิ่งงาม
-          </Typography>
-          <Typography
-            variant="body2"
-            sx={{
-              color: "#6C757D",
-            }}
-          >
-            วันที่บันทึก: 16/11/2568 | ผู้บันทึก: สุขสันต์ วงศ์ล่ำ | รหัสเคส:{" "}
-            {id}
-          </Typography>
-        </Box>
-
-        {/* กล่องข้อมูล */}
-
-        <ProfileCard />
-        <Box
-          sx={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(364px, 1fr))", // คอลัมน์ปรับตามขนาดหน้าจอ
-            gap: "24px", // ระยะห่างระหว่างไอเทม (ทั้งแนวนอนและแนวตั้ง)
-          }}
-        >
-          {data.map((item, idx) => (
-            <Paper
-              key={idx}
+            <img
+              src="/drop_down.svg"
+              alt="Icon"
+              style={{
+                width: "24px",
+                height: "24px",
+                marginRight: "8px",
+                cursor: "pointer",
+              }}
+              onClick={handleBackClick}
+            />
+            <Typography
+       
               sx={{
-                padding: "16px",
-                borderRadius: "8px",
-                border: "1px solid #6A9BFF", // เส้นขอบ
-                height: "156px",
-                width: "100%", // ปรับให้เต็มคอลัมน์ของ grid
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                boxShadow: "0px 2px 4px 0px rgba(0, 0, 0, 0.05)", // เงาตามกำหนด
+                fontWeight: "bold",
+                color: "#007BFF",
+                marginRight: "auto", // ทำให้ข้อความถัดไปชิดขวา
+                fontSize:"24px"
               }}
             >
-              <Box>
-                <Typography sx={{ fontWeight: "bold", color: "#407BF1" }}>
-                  {item.title}
-                </Typography>
-              </Box>
-              <Box>
-                {item.details.map(([label, value], idx) => (
-                  <Typography
-                    key={idx}
-                    sx={{
-                      color: "#4F4F4F",
-                      display: "flex",
-                      justifyContent: "space-between",
-                      textAlign: "center",
-                    }}
-                  >
-                    <Typography sx={{ color: "#407BF1", textAlign: "center" }}>
-                      {label}
-                    </Typography>
-                    {value}
-                  </Typography>
-                ))}
-              </Box>
-            </Paper>
-          ))}
-        </Box>
+              ปียะพักร์ ยิ่งงาม
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                color: "#6C757D",
+              }}
+            >
+              วันที่บันทึก : 16/11/2024  ผู้บันทึก : สุขสันต์ วงค์สว่าง  เลขที่ :{" "}
+              {id}
+            </Typography>
+          </Box>
 
-        <Box
-          sx={{
-            height: "16px",
-          }}
-        ></Box>
-        <EndfileCard />
+          {/* กล่องข้อมูล */}
+
+          <ProfileCard />
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(364px, 1fr))", // คอลัมน์ปรับตามขนาดหน้าจอ
+              gap: "18px", // ระยะห่างระหว่างไอเทม (ทั้งแนวนอนและแนวตั้ง)
+            }}
+          >
+            {data.map((item, idx) => (
+              <Paper
+                key={idx}
+                sx={{
+                  padding: "16px",
+                  borderRadius: "8px",
+                  border: "1px solid #6A9BFF", // เส้นขอบ
+                  height: "156px",
+                  width: "100%", // ปรับให้เต็มคอลัมน์ของ grid
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  boxShadow: "0px 2px 4px 0px rgba(0, 0, 0, 0.05)", // เงาตามกำหนด
+                }}
+              >
+                <Box>
+                  <Typography sx={{ fontWeight: "bold", color: "#407BF1" }}>
+                    {item.title}
+                  </Typography>
+                </Box>
+                <Box>
+                  {item.details.map(([label, value], idx) => (
+                    <Typography
+                      key={idx}
+                      sx={{
+                        color: "#4F4F4F",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        textAlign: "center",
+                      }}
+                    >
+                      <Typography
+                        sx={{ color: "#407BF1", textAlign: "center" }}
+                      >
+                        {label}
+                      </Typography>
+                      {value}
+                    </Typography>
+                  ))}
+                </Box>
+              </Paper>
+            ))}
+          </Box>
+
+          <Box
+            sx={{
+              height: "16px",
+            }}
+          ></Box>
+          <EndfileCard />
+        </Box>
       </Box>
+
       {/* ----- */}
       <Box
         sx={{
           width: "551px",
-          height: "1024px",
+          height: "921px",
           backgroundColor: COLORS.background,
           boxSizing: "border-box",
           marginRight: "-32px",
-          marginTop: "-35px",
+          marginTop: "-28px",
           maxWidth: "1440px",
           padding: "22px",
           display: "flex",

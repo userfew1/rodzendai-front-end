@@ -14,7 +14,7 @@ export const COLORS = {
   secondary100: "#FBFBFB",
   background100: "#F8F9FD",
   success200:"#52C0BC",
-  
+  success100:"#EFFAFA",
   success: "#2ECC71",
   danger: "#E74C3C",
   danger700: "#F68671",
