@@ -232,8 +232,12 @@ const ScreeningForm = () => {
               <MenuItem value="" disabled>
                 ประเภทรถรับส่ง
               </MenuItem>
-              <MenuItem value="งบ1">งบ 1</MenuItem>
-              <MenuItem value="งบ2">งบ 2</MenuItem>
+              <MenuItem value="1">Ambulance</MenuItem>
+              <MenuItem value="2">Taxi</MenuItem>
+              <MenuItem value="3">Bolt</MenuItem>
+              <MenuItem value="4">รถ ท้องถิ่น</MenuItem>
+              <MenuItem value="5">รถไฟ</MenuItem>
+              <MenuItem value="6">เครื่องบิน</MenuItem>
             </Select>
           )}
           {renderSection(
@@ -270,8 +274,13 @@ const ScreeningForm = () => {
               <MenuItem value="" disabled>
                 ชื่อหน่วยบริการ
               </MenuItem>
-              <MenuItem value="งบ1">งบ 1</MenuItem>
-              <MenuItem value="งบ2">งบ 2</MenuItem>
+
+              <MenuItem value="1">Ambulance</MenuItem>
+              <MenuItem value="2">Taxi</MenuItem>
+              <MenuItem value="3">Bolt</MenuItem>
+              <MenuItem value="4">รถ ท้องถิ่น</MenuItem>
+              <MenuItem value="5">รถไฟ</MenuItem>
+              <MenuItem value="6">เครื่องบิน</MenuItem>
             </Select>
           )}
         </Box>
@@ -491,7 +500,7 @@ const ScreeningForm = () => {
           borderRadius: "8px",
           justifyContent: "center",
           alignItems: "center",
-          color:COLORS.font_color
+          color: COLORS.font_color,
         }}
       >
         บันทึกข้อมูล
@@ -960,8 +969,12 @@ export default function CustomSelect() {
       <MenuItem value="" disabled>
         โปรดเลือกงบประมาณ
       </MenuItem>
-      <MenuItem value="งบ1">งบ 1</MenuItem>
-      <MenuItem value="งบ2">งบ 2</MenuItem>
+      <MenuItem value="กองทุนหลักประกันสุขภาพท้องถิ่น (กทม.)">
+        กองทุนหลักประกันสุขภาพท้องถิ่น (กทม.)
+      </MenuItem>
+      <MenuItem value="กองทุนหลักประกันสุขภาพแห่งชาติ">
+        กองทุนหลักประกันสุขภาพแห่งชาติ
+      </MenuItem>
     </Select>
   );
 }

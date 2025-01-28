@@ -1,6 +1,30 @@
 import { Box, Paper, Typography } from "@mui/material";
 
-const ProfileCard = () => (
+interface ProfileCardProps {
+  name: string;
+  contact: string;
+  idNumber: string;
+  birthday: string;
+  age: number;
+  documentLink: string;
+  patientType: string;
+  serviceType: string;
+  travelAbility: string;
+  diagnosis: string;
+}
+
+const ProfileCard: React.FC<ProfileCardProps> = ({
+  name,
+  contact,
+  idNumber,
+  birthday,
+  age,
+  documentLink,
+  patientType,
+  serviceType,
+  travelAbility,
+  diagnosis,
+}) => (
   <Paper
     sx={{
       padding: "0px 16px 0px 12px",
@@ -15,16 +39,21 @@ const ProfileCard = () => (
       boxShadow: "0px 2px 4px 0px rgba(0, 0, 0, 0.05)",
     }}
   >
-    <ProfileHeader />
-    <ProfileDetails />
-    <ContactInfo />
-    <AdditionalInfo />
+    <ProfileHeader name={name} />
+    <ProfileDetails patientType={patientType} serviceType={serviceType} />
+    <ContactInfo contact={contact} />
+    <AdditionalInfo
+      idNumber={idNumber}
+      birthday={birthday}
+      age={age}
+      documentLink={documentLink}
+    />
     <Divider />
-    <ProfileFooter />
+    <ProfileFooter travelAbility={travelAbility} diagnosis={diagnosis} />
   </Paper>
 );
 
-const ProfileHeader = () => (
+const ProfileHeader: React.FC<{ name: string }> = ({ name }) => (
   <Typography
     variant="body1"
     sx={{
@@ -35,11 +64,14 @@ const ProfileHeader = () => (
     }}
   >
     <img src="/man.svg" alt="Icon" style={{ width: "24px", height: "24px" }} />
-    ปิยะพัทธ์ ยิ่งงาม
+    {name}
   </Typography>
 );
 
-const ProfileDetails = () => (
+const ProfileDetails: React.FC<{ patientType: string; serviceType: string }> = ({
+  patientType,
+  serviceType,
+}) => (
   <Box
     sx={{
       textAlign: "center",
@@ -52,18 +84,18 @@ const ProfileDetails = () => (
       <Typography component="span" sx={{ color: "#407BF1" }}>
         ประเภทผู้ป่วย:
       </Typography>{" "}
-      ผู้พิการ
+      {patientType}
     </Typography>
     <Typography sx={{ color: "#4F4F4F" }}>
       <Typography component="span" sx={{ color: "#407BF1" }}>
         ประเภทการบริการ:
       </Typography>{" "}
-      กองทุนท้องถิ่น (กปท.)
+      {serviceType}
     </Typography>
   </Box>
 );
 
-const ContactInfo = () => (
+const ContactInfo: React.FC<{ contact: string }> = ({ contact }) => (
   <Box
     sx={{
       height: "22px",
@@ -76,11 +108,16 @@ const ContactInfo = () => (
       color: "white",
     }}
   >
-    092 3333333 (หลัก), 092 3333333 (รอง)
+    {contact}
   </Box>
 );
 
-const AdditionalInfo = () => (
+const AdditionalInfo: React.FC<{
+  idNumber: string;
+  birthday: string;
+  age: number;
+  documentLink: string;
+}> = ({ idNumber, birthday, age, documentLink }) => (
   <Box
     sx={{
       textAlign: "center",
@@ -95,16 +132,16 @@ const AdditionalInfo = () => (
         src="/id.svg"
         alt="Icon"
         style={{ width: "24px", height: "24px", marginRight: "8px" }}
-      />{" "}
-      1 21 2234 23456 1
+      />
+      {idNumber}
     </Typography>
     <Typography sx={{ color: "#808080", display: "flex", alignItems: "center" }}>
       <img
         src="/birthday.svg"
         alt="Icon"
         style={{ width: "24px", height: "24px", marginRight: "8px" }}
-      />{" "}
-      16/11/2000 (24 ปี)
+      />
+      {birthday} 
     </Typography>
     <Typography
       sx={{
@@ -119,7 +156,9 @@ const AdditionalInfo = () => (
         alt="Icon"
         style={{ width: "24px", height: "24px", marginRight: "8px" }}
       />
-      ดูเอกสารบัตรประชาชน
+      <a  target="_blank" rel="noopener noreferrer">
+        ดูเอกสารบัตรประชาชน
+      </a>
     </Typography>
   </Box>
 );
@@ -135,7 +174,10 @@ const Divider = () => (
   />
 );
 
-const ProfileFooter = () => (
+const ProfileFooter: React.FC<{ travelAbility: string; diagnosis: string }> = ({
+  travelAbility,
+  diagnosis,
+}) => (
   <Box
     sx={{
       display: "flex",
@@ -149,13 +191,13 @@ const ProfileFooter = () => (
       <Typography component="span" sx={{ color: "#407BF1", marginRight: "4px" }}>
         ความสามารถในการเดินทาง:
       </Typography>
-      ช่วยเหลือตัวเองได้
+      {travelAbility}
     </Typography>
     <Typography sx={{ color: "#4F4F4F" }}>
       <Typography component="span" sx={{ color: "#407BF1", marginRight: "4px" }}>
         การวินิจฉัยโรค:
       </Typography>
-      ปวดหัว ตัวร้อน
+      {diagnosis}
     </Typography>
   </Box>
 );

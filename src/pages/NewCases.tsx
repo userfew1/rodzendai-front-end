@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Typography,
@@ -21,176 +21,16 @@ import {
 import { COLORS } from "../assets/constants";
 import { useNavigate } from "react-router-dom";
 import DateRangeSelector from "../widget/dp";
-
+import { getMethod, initGoogleClient } from "../config/config_key";
+import { gapi } from "gapi-script";
 const NewCases: React.FC = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const navigate = useNavigate();
+  const [data, setData] = useState<string[][]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const rowsPerPage = 7;
-
-  const rows = [
-    {
-      id: 1,
-      date: "09/02/2568",
-      time: "13.00 น.",
-      name: "จิรวัฒน์ แสนธารา",
-      phone: "092 2725242",
-      destination: "โรงพยาบาลพญาไท 3",
-      jobNumber: "1234561",
-      status: "ได้",
-    },
-    {
-      id: 2,
-      date: "10/02/2568",
-      time: "14.00 น.",
-      name: "สมชาย ใจดี",
-      phone: "081 1234567",
-      destination: "โรงพยาบาลกรุงเทพ",
-      jobNumber: "1234562",
-      status: "ได้",
-    },
-    {
-      id: 3,
-      date: "11/02/2568",
-      time: "15.00 น.",
-      name: "สมหญิง สุขสบาย",
-      phone: "089 9876543",
-      destination: "โรงพยาบาลวิภาวดี",
-      jobNumber: "1234563",
-      status: "ได้",
-    },
-    {
-      id: 4,
-      date: "12/02/2568",
-      time: "16.00 น.",
-      name: "สายัณห์ เจริญสุข",
-      phone: "085 6543210",
-      destination: "โรงพยาบาลรามคำแหง",
-      jobNumber: "1234564",
-      status: "ไม่ได้",
-    },
-    {
-      id: 5,
-      date: "13/02/2568",
-      time: "17.00 น.",
-      name: "ณัฐพงษ์ พิพัฒน์",
-      phone: "084 3217890",
-      destination: "โรงพยาบาลพญาไท 2",
-      jobNumber: "1234565",
-      status: "ไม่ได้",
-    },
-    {
-      id: 6,
-      date: "14/02/2568",
-      time: "18.00 น.",
-      name: "วิไลวรรณ สุวรรณ",
-      phone: "087 6549870",
-      destination: "โรงพยาบาลสมิติเวช",
-      jobNumber: "1234566",
-      status: "ไม่ได้",
-    },
-    {
-      id: 7,
-      date: "15/02/2568",
-      time: "19.00 น.",
-      name: "ปรเมศวร์ นฤมิตร",
-      phone: "082 4561230",
-      destination: "โรงพยาบาลลาดพร้าว",
-      jobNumber: "1234567",
-      status: "รอคัดกรอง",
-    },
-    {
-      id: 8,
-      date: "16/02/2568",
-      time: "20.00 น.",
-      name: "มัทนา รุ่งโรจน์",
-      phone: "081 1237894",
-      destination: "โรงพยาบาลยันฮี",
-      jobNumber: "1234568",
-      status: "รอคัดกรอง",
-    },
-    {
-      id: 9,
-      date: "17/02/2568",
-      time: "21.00 น.",
-      name: "ธนา วัฒนธรรม",
-      phone: "080 9873210",
-      destination: "โรงพยาบาลเปาโล",
-      jobNumber: "1234569",
-      status: "รอคัดกรอง",
-    },
-    {
-      id: 10,
-      date: "17/02/2568",
-      time: "21.00 น.",
-      name: "ธนา วัฒนธรรม",
-      phone: "080 9873210",
-      destination: "โรงพยาบาลเปาโล",
-      jobNumber: "1234569",
-      status: "รอคัดกรอง",
-    },
-    {
-      id: 11,
-      date: "17/02/2568",
-      time: "21.00 น.",
-      name: "ธนา วัฒนธรรม",
-      phone: "080 9873210",
-      destination: "โรงพยาบาลเปาโล",
-      jobNumber: "1234569",
-      status: "รอคัดกรอง",
-    },
-    {
-      id: 12,
-      date: "17/02/2568",
-      time: "21.00 น.",
-      name: "ธนา วัฒนธรรม",
-      phone: "080 9873210",
-      destination: "โรงพยาบาลเปาโล",
-      jobNumber: "1234569",
-      status: "รอคัดกรอง",
-    },
-    {
-      id: 13,
-      date: "17/02/2568",
-      time: "21.00 น.",
-      name: "ธนา วัฒนธรรม",
-      phone: "080 9873210",
-      destination: "โรงพยาบาลเปาโล",
-      jobNumber: "1234569",
-      status: "รอคัดกรอง",
-    },
-    {
-      id: 14,
-      date: "17/02/2568",
-      time: "21.00 น.",
-      name: "ธนา วัฒนธรรม",
-      phone: "080 9873210",
-      destination: "โรงพยาบาลเปาโล",
-      jobNumber: "1234569",
-      status: "รอคัดกรอง",
-    },
-    {
-      id: 15,
-      date: "17/02/2568",
-      time: "21.00 น.",
-      name: "ธนา วัฒนธรรม",
-      phone: "080 9873210",
-      destination: "โรงพยาบาลเปาโล",
-      jobNumber: "1234569",
-      status: "รอคัดกรอง",
-    },
-  ];
-
-  const filteredRows =
-    tabIndex === 0
-      ? rows
-      : rows.filter((row) =>
-          tabIndex === 1
-            ? row.status === "รอคัดกรอง"
-            : tabIndex === 2
-            ? row.status === "ได้"
-            : row.status === "ไม่ได้"
-        );
 
   const statusColors: Record<string, string> = {
     ได้: "#99D4D2",
@@ -198,11 +38,84 @@ const NewCases: React.FC = () => {
     รอคัดกรอง: "#6A9BFF",
   };
 
+  // Fetch data and store in localStorage if not already present
+  const fetchData = async () => {
+    const cacheKey = "all-data";
+    const cachedData = localStorage.getItem(cacheKey);
+
+    if (cachedData) {
+      try {
+        const parsedData = JSON.parse(cachedData);
+        if (!Array.isArray(parsedData))
+          throw new Error("Invalid cached data format");
+        setData(parsedData);
+      } catch (err) {
+        console.error("Failed to parse cached data:", err);
+        localStorage.removeItem(cacheKey);
+        await fetchAndStoreData();
+      }
+    } else {
+      await fetchAndStoreData();
+    }
+  };
+
+  // Fetch all data and store it
+  const fetchAndStoreData = async () => {
+    try {
+      setLoading(true);
+      const response = await getMethod("A:AB");
+      console.log("API Response:", response); // ตรวจสอบข้อมูลที่ได้จาก API
+
+      // ตัด header ออกและกรองแถวว่าง
+      const dataWithoutHeaders = response
+        .slice(1)
+        .filter((row: string[]) => row.length > 0 && row[1]?.trim() !== "");
+
+      setData(dataWithoutHeaders);
+      localStorage.setItem("all-data", JSON.stringify(dataWithoutHeaders));
+    } catch (err) {
+      console.error("Failed to fetch data:", err);
+      setError("Failed to fetch data");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const filteredRows =
+    tabIndex === 0
+      ? data.filter((row) => row.length > 0 && row[1]?.trim() !== "") // กรองแถวว่าง
+      : data.filter(
+          (row) =>
+            row.length > 0 &&
+            row[1]?.trim() !== "" && // กรองแถวว่าง
+            (tabIndex === 1
+              ? row[5] === "รอคัดกรอง"
+              : tabIndex === 2
+              ? row[5] === "ได้"
+              : row[5] === "ไม่ได้")
+        );
+
+  const displayedRows = filteredRows
+    .filter((row) => row.length > 0 && row[1]?.trim() !== "") // กรองแถวว่าง
+    .slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage);
+
+  const totalPageCount = Math.ceil(filteredRows.length / rowsPerPage);
+
   const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
     setTabIndex(newValue);
   };
-  const handleRowClick = (id: number, status: string) => {
-    navigate(`/case/${id}`, { state: { status } });
+
+  const handleRowClick = (index: number) => {
+    const jobNumber = data[index][1];
+    if (jobNumber) {
+      navigate(`/case/${jobNumber}`, { state: { status: "รอคัดกรอง" } });
+    } else {
+      console.error("Invalid jobNumber:", jobNumber);
+    }
   };
 
   const handlePaginationChange = (
@@ -211,13 +124,7 @@ const NewCases: React.FC = () => {
   ) => {
     setCurrentPage(value);
   };
-  const totalPageCount = Math.ceil(filteredRows.length / rowsPerPage);
-  const displayedRows = filteredRows.slice(
-    (currentPage - 1) * rowsPerPage,
-    currentPage * rowsPerPage
-  );
-  const startRow = (currentPage - 1) * rowsPerPage + 1;
-  const endRow = Math.min(currentPage * rowsPerPage, filteredRows.length);
+
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [filterOption, setFilterOption] = useState<string>("ทั้งหมด");
 
@@ -231,14 +138,14 @@ const NewCases: React.FC = () => {
 
   const handleFilterOption = (option: string) => {
     setFilterOption(option);
-    setIsPopupOpen(false); // ปิด Popup หลังจากเลือก
+    setIsPopupOpen(false);
   };
 
   const [selectedValueCases, setSelectedValueCases] = useState("");
-  const handleChangeCases = (event: {
-    target: { value: React.SetStateAction<string> };
-  }) => setSelectedValueCases(event.target.value);
-
+  const handleChangeCases = (event: { target: { value: string } }) =>
+    setSelectedValueCases(event.target.value);
+  const startRow = (currentPage - 1) * rowsPerPage + 2; // เริ่มจาก filteredRows
+  const endRow = Math.min(currentPage * rowsPerPage, filteredRows.length); // คำนวณถึง filteredRows
   return (
     <Box
       sx={{
@@ -414,9 +321,7 @@ const NewCases: React.FC = () => {
                   padding: "16px 0",
                 }}
               >
-                <Box
-                  sx={{ display: "flex", gap: "8px", alignItems: "center" }}
-                >
+                <Box sx={{ display: "flex", gap: "8px", alignItems: "center" }}>
                   <Box
                     sx={{
                       display: "flex",
@@ -479,7 +384,7 @@ const NewCases: React.FC = () => {
                   ))}
                 </RadioGroup>
                 <Box>
-                <Box
+                  <Box
                     sx={{
                       display: "flex",
                       alignItems: "center",
@@ -500,8 +405,8 @@ const NewCases: React.FC = () => {
                       ช่วงวันที่อัปเดต
                     </Typography>
                   </Box>
-                  
-                  <DateRangeSelector/>
+
+                  <DateRangeSelector />
                 </Box>
               </DialogContent>
 
@@ -566,7 +471,7 @@ const NewCases: React.FC = () => {
               },
             }}
           >
-            <Tab label="ทั้งหมด (250)" />
+            <Tab label={`ทั้งหมด (${data.length})`} />
             <Tab label="รอคัดกรอง (50)" />
             <Tab label="สามารถเดินทางได้ (100)" />
             <Tab label="ไม่สามารถเดินทางได้ (100)" />
@@ -580,6 +485,13 @@ const NewCases: React.FC = () => {
               marginLeft: "auto", // ชิดขวา
               width: "113px",
               height: "38px",
+            }}
+            onClick={async () => {
+              // ล้างข้อมูลใน localStorage
+              localStorage.removeItem("all-data");
+
+              // เรียก API ใหม่และอัปเดตข้อมูล
+              fetchData();
             }}
           >
             อัปเดตข้อมูล
@@ -609,15 +521,15 @@ const NewCases: React.FC = () => {
           <Box sx={{ textAlign: "center" }}>เลขที่ใบงาน</Box>
           <Box sx={{ textAlign: "center" }}>สถานะ</Box>
         </Box>
-        {displayedRows.map((row) => (
+        {displayedRows.map((row, index) => (
           <Paper
-            key={row.id}
-            onClick={() => handleRowClick(row.id, row.status)}
+            key={index}
+            onClick={() => handleRowClick(index)}
             sx={{
               display: "grid",
               gridTemplateColumns: "repeat(7, 1fr)",
               gap: "20px",
-              padding: "0px 0px 0px 24px",
+              padding: "0px 0px 0px 0px",
               height: "78px",
               marginTop: "16px",
               borderRadius: "16px",
@@ -632,15 +544,61 @@ const NewCases: React.FC = () => {
               },
             }}
           >
-            <Box>{row.date}</Box>
-            <Box>{row.time}</Box>
-            <Box>{row.name}</Box>
-            <Box>{row.phone}</Box>
-            <Box>{row.destination}</Box>
-            <Box>{row.jobNumber}</Box>
             <Box
               sx={{
-                backgroundColor: statusColors[row.status],
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              {row[8] || "ไม่ระบุ"} 
+            </Box>
+
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              {row[9] || "ไม่ระบุ"}
+            </Box>
+            <Box
+              title={row[9]}
+              sx={{
+                textOverflow: "ellipsis", // แสดง ... หากข้อความยาวเกิน
+                overflow: "hidden", // ซ่อนข้อความส่วนเกิน
+                whiteSpace: "nowrap", // ไม่ให้ข้อความขึ้นบรรทัดใหม่
+              }}
+            >
+              {row[3] || "ไม่ระบุ"}
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              {row[4] || "ไม่ระบุ"}
+            </Box>
+            <Box
+              sx={{
+                textOverflow: "ellipsis", // แสดง ... หากข้อความยาวเกิน
+                overflow: "hidden", // ซ่อนข้อความส่วนเกิน
+                whiteSpace: "nowrap", // ไม่ให้ข้อความขึ้นบรรทัดใหม่
+              }}
+            >
+              {row[16] || "ไม่ระบุ" } 
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              {row[1] || "ไม่ระบุ"}
+            </Box>
+            <Box
+              sx={{
+                backgroundColor: statusColors["รอคัดกรอง"], // คอลัมน์สถานะ (สมมติว่าเป็นคอลัมน์สุดท้าย)
                 color: "#fff",
                 textAlign: "center",
                 height: "30px",
@@ -652,7 +610,7 @@ const NewCases: React.FC = () => {
                 alignItems: "center",
               }}
             >
-              {row.status}
+              รอคัดกรอง
             </Box>
           </Paper>
         ))}

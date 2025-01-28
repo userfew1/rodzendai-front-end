@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { COLORS } from "../assets/constants";
 
@@ -13,6 +13,17 @@ const menuItems = [
 const Settings: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<number | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [keyInput, setKeyInput] = useState<string>("");
+  const [isConnected, setIsConnected] = useState<boolean>(false);
+
+  useEffect(() => {
+    // ดึงข้อมูลจาก localStorage เมื่อคอมโพเนนต์ถูกโหลด
+    const storedKey = localStorage.getItem("keysheets");
+    if (storedKey) {
+      setKeyInput(storedKey);
+      setIsConnected(true);
+    }
+  }, []);
 
   const handleItemClick = (id: number) => {
     if (selectedItem === id) {
@@ -23,6 +34,23 @@ const Settings: React.FC = () => {
     }
   };
 
+  const handleSaveKey = () => {
+    if (keyInput.trim() === "") {
+      alert("กรุณากรอก ID หรือ Key ก่อนบันทึก");
+      return;
+    }
+    localStorage.setItem("keysheets", keyInput);
+    setIsConnected(true);
+    alert("บันทึกข้อมูลสำเร็จ");
+  };
+
+  const handleDisconnect = () => {
+    localStorage.removeItem("keysheets");
+    setKeyInput("");
+    setIsConnected(false);
+    alert("ยกเลิกการเชื่อมต่อสำเร็จ");
+  };
+
   return (
     <Box
       sx={{
@@ -31,7 +59,6 @@ const Settings: React.FC = () => {
         padding: "16px",
       }}
     >
-      {/* เมนูทางซ้าย */}
       <Box sx={{ flex: 1 }}>
         <Typography
           sx={{
@@ -95,24 +122,15 @@ const Settings: React.FC = () => {
                   paddingLeft: "8px",
                 }}
               >
-                <Box
+                <Typography
                   sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "flex-start",
-                    width: "100%",
+                    fontWeight: "bold",
+                    fontSize: "14px",
+                    color: "#00A29C",
                   }}
                 >
-                  <Typography
-                    sx={{
-                      fontWeight: "bold",
-                      fontSize: "14px",
-                      color: "#00A29C",
-                    }}
-                  >
-                    {item.label}
-                  </Typography>
-                </Box>
+                  {item.label}
+                </Typography>
               </Box>
             </Box>
           ))}
@@ -122,104 +140,68 @@ const Settings: React.FC = () => {
         <Box
           sx={{
             zIndex: 10,
-            width: "551px", // ขนาดของ Box
-            height: "920px", // ความสูงของ Box
-            backgroundColor: COLORS.background, // สีพื้นหลัง
-            boxSizing: "border-box",
-            marginRight: "-32px", // ระยะห่างขวา
-            marginTop: "-35px", // ระยะห่างจากบน
-            maxWidth: "1440px", // ขนาดสูงสุด
-            padding: "22px", // Padding รอบ Box
+            width: "551px",
+            height: "920px",
+            backgroundColor: COLORS.background,
+            padding: "22px",
             display: "flex",
             flexDirection: "column",
-            justifyContent: "space-between", // ให้ปุ่มอยู่ล่างสุด
+            justifyContent: "space-between",
           }}
         >
           <Box
             sx={{
-              backgroundColor: COLORS.primary100, // สีพื้นหลังของ Box ภายใน
-              width: "100%", // ใช้ความกว้าง 100% จาก Box ด้านนอก
-              height: "872px", // ความสูงของ Box ภายใน
-              borderRadius: "18px", // มุมมน
-              padding: "18px", // Padding ภายใน Box
+              backgroundColor: COLORS.primary100,
+              width: "100%",
+              height: "872px",
+              borderRadius: "18px",
+              padding: "18px",
               display: "flex",
               flexDirection: "column",
-              gap: "20px", // ระยะห่างระหว่างแต่ละไอเท็ม
-              flexGrow: 1, // ให้พื้นที่ส่วนนี้ขยายไปเต็มที่
+              gap: "20px",
+              flexGrow: 1,
             }}
           >
-            <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <img
-                src="/links.svg"
-                alt="Icon"
-                style={{
-                  width: "24px",
-                  height: "24px",
-                }}
-              />
-              <Typography
-                sx={{
-                  fontSize: "16px",
-                  fontWeight: "bold",
-                  color: COLORS.primary, // สีข้อความเป็นสีขาว
-                }}
-              >
-                การเชื่อมต่อ google sheet
-              </Typography>
-            </Box>
-
-            <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <img
-                src="/id.svg"
-                alt="Icon"
-                style={{
-                  width: "24px",
-                  height: "24px",
-                }}
-              />
-              <Typography
-                sx={{
-                  fontSize: "16px",
-                  color: COLORS.primary, // สีข้อความเป็นสีขาว
-                }}
-              >
-                ID หรือ Key ของ google sheet
-              </Typography>
-            </Box>
-
+            <Typography
+              sx={{
+                fontSize: "16px",
+                fontWeight: "bold",
+                color: COLORS.primary,
+              }}
+            >
+              การเชื่อมต่อ google sheet
+            </Typography>
             <TextField
               sx={{
                 width: "100%",
                 marginTop: "16px",
                 backgroundColor: "white",
                 borderRadius: "8px",
-                paddingLeft: "8px",
                 border: "none",
                 boxShadow: "none",
                 "& .MuiOutlinedInput-notchedOutline": { border: "none" },
               }}
               placeholder="กรอก ID หรือ Key"
               variant="outlined"
+              onChange={(e) => setKeyInput(e.target.value)}
+              value={keyInput}
               InputProps={{
                 disableUnderline: true,
               }}
             />
 
-            {/* ปุ่มอยู่ที่ล่างสุด */}
             <Button
+              onClick={isConnected ? handleDisconnect : handleSaveKey}
               sx={{
                 height: "48px",
-                backgroundColor: COLORS.primary650,
-                marginTop: "auto", // ให้ปุ่มอยู่ที่ล่างสุด
+                backgroundColor: isConnected
+                  ? COLORS.primary650
+                  : COLORS.primary650,
+                marginTop: "auto",
               }}
             >
-              <Typography
-                sx={{
-                  fontSize: "16px",
-                  color: "white", // สีข้อความเป็นสีขาว
-                }}
-              >
-                เชื่อมต่อ
+              <Typography sx={{ fontSize: "16px", color: "white" }}>
+                {isConnected ? "ยกเลิกการเชื่อมต่อ" : "บันทึก"}
               </Typography>
             </Button>
           </Box>
